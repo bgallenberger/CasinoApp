@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CasinoApp.Views.Mode.ModeMainPage"
+             Title="Modes in Game">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="OnItemAdded">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP" Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ListView x:Name="listView" Margin="20" ItemSelected="OnListItemSelected">
+        <ListView.Header>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="      Name         Played"
+               TextColor="Black" />
+            </StackLayout>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="20,0,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding FullName}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="{Binding Played}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="{Binding JackpotChance}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="{Binding PayoutPercent}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+                        <Image Source="Edit.png" HorizontalOptions="End">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer
+                                        Tapped="EditMode"
+                                        CommandParameter="{Binding Cost}"
+                                        NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
