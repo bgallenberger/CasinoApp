@@ -42,7 +42,13 @@ namespace CasinoApp.Views.Play
                 Update();
             }
         }
-
+        async void OnAddJackpotClicked(object sender, EventArgs e)
+        {
+            var ModeItem = (Models.Mode)BindingContext;
+            HttpClient client = new HttpClient();
+            var response = await client.GetStringAsync("http://casinowebapp.azurewebsites.net/API/AddJackpot?gameID=" + mode.GameID + "&modeID=" + mode.ID);
+            Update();
+        }
         async void OnCancelClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
@@ -52,32 +58,34 @@ namespace CasinoApp.Views.Play
         {
             HttpClient client = new HttpClient();
             var response = await client.GetStringAsync("http://casinowebapp.azurewebsites.net/API/GetMode?gameID=" + mode.GameID + "&modeID=" + mode.ID);
-            //var newMode = new Models.Mode();
-            //newMode = JsonConvert.DeserializeObject<Models.Mode>(response);
+            var newMode = new Models.Mode();
+            newMode = JsonConvert.DeserializeObject<Models.Mode>(response);
 
-            //newMode.GameID = mode.GameID;
-            //newMode.FullName = mode.FullName;
+            newMode.GameID = mode.GameID;
+            newMode.FullName = mode.FullName;
 
-            //if (newMode.Jackpots == 0)
-            //{
-            //    newMode.JackpotChance = "0%";
-            //}
-            //else
-            //{
-            //    newMode.JackpotChance = "" + Math.Round((double)(newMode.Jackpots / newMode.Played), 2) + "%";
-            //}
+            if (newMode.Jackpots == 0 || newMode.Played == 0)
+            {
+                newMode.JackpotChance = "0%";
+            }
+            else
+            { 
+                newMode.JackpotChance = "" + Math.Round(((double)(newMode.Jackpots / newMode.Played)) * 100) + "%";
+            }
 
-            //if (newMode.Payedout == 0)
-            //{
-            //    newMode.PayoutPercent = "0%";
-            //}
-            //else
-            //{
-            //    newMode.PayoutPercent = "" + Math.Round((double)(newMode.Payedout / (newMode.Cost * newMode.Played)), 2) * 100 + "%";
-            //}
-            //newMode.Win = 0;
+            if (newMode.Payedout == 0 || newMode.Played == 0)
+            {
+                newMode.PayoutPercent = "0%";
+            }
+            else
+            {
+                newMode.PayoutPercent = "" + Math.Round((double)(newMode.Payedout / (newMode.Cost * newMode.Played)), 2) * 100 + "%";
+            }
+            newMode.Win = 0;
 
-            //mode = newMode;
+            newMode.BannerText = "Played: " + newMode.Played + " times\nPayout Percent: " + newMode.PayoutPercent + "\nBonus: " + newMode.Jackpots + " times\nBonus Chance: " + newMode.JackpotChance;
+
+            mode = newMode;
 
             this.BindingContext = mode;
         }

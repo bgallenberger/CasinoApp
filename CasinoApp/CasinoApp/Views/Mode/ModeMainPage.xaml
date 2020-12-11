@@ -17,10 +17,10 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <ListView x:Name="listView" Margin="20" ItemSelected="OnListItemSelected">
+    <ListView x:Name="listView" Margin="0" ItemSelected="OnListItemSelected">
         <ListView.Header>
             <StackLayout Orientation="Horizontal">
-                <Label Text="      Name         Played"
+                <Label Text="      Name      Played   Bonus Chance     Payout"
                TextColor="Black" />
             </StackLayout>
         </ListView.Header>
@@ -28,7 +28,7 @@
             <DataTemplate>
                 <ViewCell>
                     <StackLayout Margin="20,0,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Label Text="{Binding FullName}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="{Binding FullName}" VerticalTextAlignment="Center" HorizontalOptions="Start" />
                         <Label Text="{Binding Played}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
                         <Label Text="{Binding JackpotChance}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
                         <Label Text="{Binding PayoutPercent}" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />

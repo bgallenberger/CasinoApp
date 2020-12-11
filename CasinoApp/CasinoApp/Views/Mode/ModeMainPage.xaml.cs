@@ -34,7 +34,7 @@ namespace CasinoApp.Views.Mode
             {
                 item.FullName = "$" + item.Cost + " " + item.Name;
                 item.GameID = game.ID;
-                if (item.Jackpots == 0)
+                if (item.Jackpots == 0 || item.Played == 0)
                 {
                     item.JackpotChance = "0%";
                 }
@@ -43,7 +43,7 @@ namespace CasinoApp.Views.Mode
                     item.JackpotChance = "" + Math.Round((double)(item.Jackpots / item.Played), 2) + "%";
                 }
 
-                if (item.Payedout == 0)
+                if (item.Payedout == 0 || item.Played == 0)
                 {
                     item.PayoutPercent = "0%";
                 }

@@ -14,8 +14,9 @@ namespace CasinoApp.Models
         public int Played { get; set; }
         public double Payedout { get; set; }
         public int Jackpots { get; set; }
-        public String JackpotChance { get; set; }
-        public String PayoutPercent { get; set; }
+        public string JackpotChance { get; set; }
+        public string PayoutPercent { get; set; }
         public double Win { get; set; }
+        public string BannerText { get; set; }
     }
 }

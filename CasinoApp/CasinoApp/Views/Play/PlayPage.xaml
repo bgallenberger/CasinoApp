@@ -8,12 +8,11 @@
              Title="{Binding FullName}">
 
     <StackLayout Margin="20" VerticalOptions="StartAndExpand">
-        <Label Text="{Binding Payedout}" />
-        <Label Text="{Binding GameID}" />
-        <Label Text="{Binding ID}" />
-        <Label Text="Win" />
+        <Label Text="{Binding BannerText}" />
+        <Label Text="Enter your Win amount" />
         <Entry Text="{Binding Win}" />
-        <Button Text="Add" Clicked="OnAddClicked" />
+        <Button Text="Add Win" Clicked="OnAddClicked" />
+        <Button Text="Add Bonus" Clicked="OnAddJackpotClicked" />
         <Button Text="Cancel" Clicked="OnCancelClicked" />
     </StackLayout>
 </ContentPage>

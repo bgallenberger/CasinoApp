@@ -31,7 +31,7 @@ namespace CasinoApp.Views.Home
             list = JsonConvert.DeserializeObject<List<Game>>(response);
             foreach(var item in list)
             {
-                if(item.Jackpots == 0)
+                if(item.Jackpots == 0 || item.TotalPlayed == 0)
                 {
                     item.JackpotChance = "0%";
                 }
@@ -40,7 +40,7 @@ namespace CasinoApp.Views.Home
                     item.JackpotChance = "" + Math.Round((double)(item.Jackpots / item.TotalPlayed), 2) + "%";
                 }
 
-                if (item.TotalPayout == 0)
+                if (item.TotalPayout == 0 || item.TotalPutIn == 0)
                 {
                     item.PayoutPercent = "0%";
                 }
